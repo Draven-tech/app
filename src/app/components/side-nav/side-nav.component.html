@@ -1,0 +1,19 @@
+<div class="side-nav">
+  <div class="bottom-nav">
+    <div class="nav-button" [class.active]="currentPage === 'page1'" (click)="navigateTo('page1')">
+      <ion-icon name="home-outline"></ion-icon>
+    </div>
+
+    <div class="nav-button" [class.active]="currentPage === 'page2'" (click)="navigateTo('page2')">
+      <ion-icon name="person-outline"></ion-icon>
+    </div>
+
+    <div class="nav-button" [class.active]="currentPage === 'page3'" (click)="navigateTo('page3')">
+      <ion-icon name="settings-outline"></ion-icon>
+    </div>
+
+    <div class="nav-button" [class.active]="currentPage === 'page4'" (click)="navigateTo('page4')">
+      <ion-icon name="help-outline"></ion-icon>
+    </div>
+  </div>
+</div>
