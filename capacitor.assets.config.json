@@ -1,0 +1,11 @@
+{
+    "splash": {
+      "sources": [
+        { "path": "assets/splash.png" }
+      ],
+      "backgroundColor": "#ffcc00", 
+      "padding": 0,
+      "resizeMode": "contain"
+    }
+  }
+  

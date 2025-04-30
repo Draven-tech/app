@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,14 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    this.initializeApp();
+  }
+
+  async initializeApp() {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    await SplashScreen.hide();
+  }
 }
+
+
