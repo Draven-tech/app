@@ -1,0 +1,49 @@
+/* Add this to your global styles or component styles */
+@import '~leaflet/dist/leaflet.css';
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px);
+  gap: 16px;
+  padding: 8px;
+
+  .map-box {
+    flex: 1;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+    
+    &#defaultMap, &#safeMap {
+      height: 100%;
+      min-height: 300px;
+      background: #f5f5f5;
+    }
+
+    .map-label {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+}
+
+/* Fix for Leaflet tiles */
+.leaflet-container {
+  background: #f5f5f5 !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(255,255,255,0.8) !important;
+  padding: 2px 5px !important;
+  font-size: 11px !important;
+}

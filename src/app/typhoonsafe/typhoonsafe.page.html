@@ -1,13 +1,16 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>typhoonsafe</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>TyphoonSafe Routes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">typhoonsafe</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="map-container">
+    <div id="defaultMap" class="map-box">
+      <div class="map-label">Default Route</div>
+    </div>
+    <div id="safeMap" class="map-box">
+      <div class="map-label">Safe Route</div>
+    </div>
+  </div>
 </ion-content>

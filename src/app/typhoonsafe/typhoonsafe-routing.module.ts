@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { TyphoonsafePage } from './typhoonsafe.page';
+import { TyphoonSafePage } from './typhoonsafe.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TyphoonsafePage
+    component: TyphoonSafePage,
+    pathMatch: 'full'
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TyphoonsafePageRoutingModule {}
+export class TyphoonSafePageRoutingModule {}

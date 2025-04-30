@@ -10,18 +10,25 @@ const routes: Routes = [
   { path: 'page4', loadChildren: () => import('./page4/page4.module').then(m => m.Page4PageModule) },
   { path: 'page5', loadChildren: () => import('./page5/page5.module').then(m => m.Page5PageModule) },
   { path: 'page6', loadChildren: () => import('./page6/page6.module').then(m => m.Page6PageModule) },
-  { path: 'typhoonsafe', loadChildren: () => import('./typhoonsafe/typhoonsafe.module').then(m => m.TyphoonsafePageModule) },
+  { 
+    path: 'typhoonsafe',
+    loadChildren: () => import('./typhoonsafe/typhoonsafe.module')
+      .then(m => m.TyphoonSafePageModule) // Must match EXACTLY
+  },
   { path: 'pallet-ai', loadChildren: () => import('./pallet-ai/pallet-ai.module').then(m => m.PalletAiPageModule) },
   { 
     path: 'fraud-watch',
-    component: FraudWatchPage // Directly load the component
+    component: FraudWatchPage
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { 
+      preloadingStrategy: PreloadAllModules,
+      enableTracing: false // Set to true to debug routes in console
+    })
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TyphoonsafePage } from './typhoonsafe.page';
+import { TyphoonSafePage } from './typhoonsafe.page';
 
 describe('TyphoonsafePage', () => {
-  let component: TyphoonsafePage;
-  let fixture: ComponentFixture<TyphoonsafePage>;
+  let component: TyphoonSafePage;
+  let fixture: ComponentFixture<TyphoonSafePage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TyphoonsafePage);
+    fixture = TestBed.createComponent(TyphoonSafePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
