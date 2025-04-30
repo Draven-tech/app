@@ -1,11 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { Camera, CameraResultType } from '@capacitor/camera';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
-import { ssim } from 'ssim.js'; // ✅ Import from ssim.js
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, setDoc } from 'firebase/firestore/lite';
+import { ssim } from 'ssim.js';
+import { CommonModule } from '@angular/common';
+
+// Simplified Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyA9mgVxf2e6hs4pKViKHCvD-Id6UEFWync",
+  authDomain: "sentinel-6186f.firebaseapp.com",
+  projectId: "sentinel-6186f"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 @Component({
-  standalone: false,
+  standalone: true,
+  imports: [
+    IonicModule,
+    CommonModule,
+  ],
   selector: 'app-fraud-watch',
   templateUrl: './fraud-watch.page.html',
   styleUrls: ['./fraud-watch.page.scss']
@@ -14,10 +31,7 @@ export class FraudWatchPage implements OnInit {
   currentImage: string | undefined;
   isLoading = false;
 
-  constructor(
-    private alertController: AlertController,
-    private firestore: Firestore
-  ) {}
+  constructor(private alertController: AlertController) {}
 
   ngOnInit() {}
 
@@ -100,8 +114,8 @@ export class FraudWatchPage implements OnInit {
               height: canvas2.height
             };
 
-            const result = ssim(image1, image2); // ✅ Compare using ssim.js
-            resolve(result.mssim); // ✅ Use mean SSIM
+            const result = ssim(image1, image2);
+            resolve(result.mssim);
           } catch (err) {
             reject(err);
           }
@@ -124,15 +138,16 @@ export class FraudWatchPage implements OnInit {
 
   private async logToFirebase(similarity: number) {
     try {
-      const docRef = doc(this.firestore, 'tamperLogs', new Date().toISOString());
+      const docRef = doc(db, 'tamperLogs', new Date().toISOString());
       await setDoc(docRef, {
         timestamp: new Date(),
-        image: this.currentImage,
         similarity,
         status: 'tamper_suspected'
       });
+      console.log('Logged to Firebase successfully');
     } catch (error) {
       console.error('Firebase error:', error);
+      // Silently fail during hackathon - you can add proper error handling later
     }
   }
 
