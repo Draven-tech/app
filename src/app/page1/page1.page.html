@@ -1,10 +1,83 @@
-<ion-header>
+<ion-header [ngClass]="{ 'hide-header': headerHidden }">
   <ion-toolbar>
-    <ion-title>Page 1 - Home</ion-title>
+    <ion-buttons slot="start">
+      <img src="assets/logo.png" alt="Logo" class="header-logo" />
+    </ion-buttons>
+    <ion-title>Sentinel</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <h1>Welcome to Page 1 (Home)</h1>
-  <p>This is the home page content.</p>
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  <div class="cover-section">
+    <img src="assets/cargo.jpg" alt="Cover" class="cover-bg" />
+
+    <div class="cover-content">
+      <h1>Smart Supply Chain. Secured.</h1>
+      <p>
+        AI-powered fraud detection. Disaster-aware delivery. Pallet optimization with AR.
+      </p>
+    
+      <ion-button class="primary-btn" expand="block" routerLink="/features">
+        🚀 Explore Features
+      </ion-button>
+    
+      <ion-button class="outline-btn" expand="block" fill="outline" routerLink="/scan">
+        🔍 Try Fraud Detection
+      </ion-button>
+    </div>
+
+  </div>
+
+  <div class="page-content">
+    <ion-card class="fraudwatch-card">
+      <ion-card-header>
+        <ion-card-title>🕵️ FraudWatch</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Scan cargo seals. AI detects tampering. Alerts and logs go to HQ.
+        <br />
+        <ion-button fill="clear" size="small" routerLink="/fraudwatch">Learn More</ion-button>
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-card class="typhoonsafe-card">
+      <ion-card-header>
+        <ion-card-title>🌀 TyphoonSafe</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Live weather-aware routing. Safer paths during floods & storms.
+        <br />
+        <ion-button fill="clear" size="small" routerLink="/typhoonsafe">See Demo</ion-button>
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-card class="palletai-card">
+      <ion-card-header>
+        <ion-card-title>📦 PalletAI</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Point your camera at a pallet. AR helps stack smarter and save space.
+        <br />
+        <ion-button fill="clear" size="small" routerLink="/palletai">Try AR Mode</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  
+<div class="footer-links">
+  <p>About Us</p>
+  <p>Careers</p>
+  <p>News and Advisories</p>
+  <p>Procurement</p>
+  <p>Contact Us</p>
+  <p>Privacy Policy</p>
+  <p>Vessels Schedules</p>
+  <p>Support</p>
+</div>
+
+<div class="footer-logo">
+  <img src="assets/logo.png" alt="Logo" />
+</div>
+
+
 </ion-content>

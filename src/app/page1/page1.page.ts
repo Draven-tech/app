@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   standalone: false,
@@ -6,11 +6,20 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './page1.page.html',
   styleUrls: ['./page1.page.scss'],
 })
-export class Page1Page implements OnInit {
 
-  constructor() { }
+export class Page1Page {
+  headerHidden = false;
+  lastScrollTop = 0;
 
-  ngOnInit() {
+  onScroll(event: any) {
+    const currentScroll = event.detail.scrollTop;
+
+    if (currentScroll > this.lastScrollTop + 10) {
+      this.headerHidden = true;
+    } else if (currentScroll < this.lastScrollTop - 10 || currentScroll <= 0) {
+      this.headerHidden = false;
+    }
+
+    this.lastScrollTop = currentScroll;
   }
-
 }
