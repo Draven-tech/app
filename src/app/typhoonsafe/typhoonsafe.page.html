@@ -1,16 +1,39 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>TyphoonSafe Routes</ion-title>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <img src="assets/logo.png" alt="Logo" class="header-logo" />
+    </ion-buttons>
+    <ion-title>Sentinel</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="map-container">
-    <div id="defaultMap" class="map-box">
-      <div class="map-label">Default Route</div>
-    </div>
-    <div id="safeMap" class="map-box">
-      <div class="map-label">Safe Route</div>
-    </div>
+  <div class="toggle-tabs">
+    <ion-segment [value]="selectedRoute" (ionChange)="selectRoute($event.detail.value)">
+      <ion-segment-button value="default">
+        <ion-label>Default Route</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="safe">
+        <ion-label>Safe Route</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    
   </div>
+
+  <div class="map-box">
+    <div id="mainMap" class="leaflet-map"></div>
+    <div class="map-label">{{ selectedRoute | titlecase }} Route</div>
+  </div>
+
+  <ion-card class="route-info-card">
+    <ion-card-header>
+      <ion-card-title>{{ selectedRoute | titlecase }} Route Details</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Distance:</strong> 28.4 km</p>
+      <p><strong>Estimated Time:</strong> 35 mins</p>
+      <p><strong>Weather Alert:</strong> None</p>
+    </ion-card-content>
+  </ion-card>
+  
 </ion-content>

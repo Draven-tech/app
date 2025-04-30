@@ -1,13 +1,26 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Fraud Watch</ion-title>
+<ion-header [ngClass]="{ 'hide-header': headerHidden }">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <img src="assets/logo.png" alt="Logo" class="header-logo" />
+    </ion-buttons>
+    <ion-title>Sentinel</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="container">
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  <div class="fraud-section">
+    <img src="assets/cargo.jpg" alt="Background" class="fraud-bg" />
+
+    <div class="fraud-content">
+      <h1>Fraud Detection</h1>
+      <p>Use AI to detect tampering on scanned cargo seals.</p>
+    </div>
+  </div>
+
+  <div class="fraud-body">
+
     <!-- Image Preview Section -->
-    <ion-card *ngIf="currentImage">
+    <ion-card *ngIf="currentImage" class="scan-card">
       <ion-card-header>
         <ion-card-title>Scanned Image</ion-card-title>
       </ion-card-header>
@@ -18,14 +31,15 @@
 
     <!-- Action Buttons -->
     <div class="button-group">
-      <ion-button expand="block" color="primary" (click)="scanSeal()">
+      <ion-button expand="block" class="primary-btn" (click)="scanSeal()">
         <ion-icon slot="start" name="camera"></ion-icon>
         Scan Seal
       </ion-button>
 
       <ion-button 
-        expand="block" 
-        color="warning" 
+        expand="block"
+        class="outline-btn"
+        fill="outline"
         (click)="checkForTampering()"
         [disabled]="!currentImage || isLoading"
       >

@@ -30,6 +30,8 @@ const db = getFirestore(app);
 export class FraudWatchPage implements OnInit {
   currentImage: string | undefined;
   isLoading = false;
+  headerHidden = false;
+  lastScrollTop = 0;
 
   constructor(private alertController: AlertController) {}
 
@@ -147,7 +149,6 @@ export class FraudWatchPage implements OnInit {
       console.log('Logged to Firebase successfully');
     } catch (error) {
       console.error('Firebase error:', error);
-      // Silently fail during hackathon - you can add proper error handling later
     }
   }
 
@@ -158,5 +159,17 @@ export class FraudWatchPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  onScroll(event: any) {
+    const currentScroll = event.detail.scrollTop;
+
+    if (currentScroll > this.lastScrollTop + 10) {
+      this.headerHidden = true;
+    } else if (currentScroll < this.lastScrollTop - 10 || currentScroll <= 0) {
+      this.headerHidden = false;
+    }
+
+    this.lastScrollTop = currentScroll;
   }
 }

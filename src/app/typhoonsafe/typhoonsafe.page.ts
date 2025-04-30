@@ -10,125 +10,77 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./typhoonsafe.page.scss']
 })
 export class TyphoonSafePage implements AfterViewInit {
+  selectedRoute: 'default' | 'safe' = 'default'; // which route to display
+  private map!: L.Map;
+
   constructor(
     private http: HttpClient,
     private platform: Platform
   ) {}
 
-  private defaultMap!: L.Map;
-  private safeMap!: L.Map;
-
   ngAfterViewInit() {
     this.platform.ready().then(() => {
-      setTimeout(() => this.initializeMaps(), 300);
+      setTimeout(() => this.initializeMap(), 300);
     });
   }
 
-  private initializeMaps() {
-    if (!this.checkMapContainers()) {
-      setTimeout(() => this.initializeMaps(), 100);
-      return;
-    }
-  
-    this.defaultMap = this.createMap('defaultMap', [13.5, 122.5]);
-    this.safeMap = this.createMap('safeMap', [13.5, 122.5]);
-  
-    // Invalidate size AFTER a slight delay to allow DOM layout
-    setTimeout(() => {
-      this.defaultMap.invalidateSize();
-      this.safeMap.invalidateSize();
-    }, 300);
-  
-    this.plotRoutes();
-    this.loadCycloneZones();
-  }
+  private initializeMap() {
+    const container = document.getElementById('mainMap');
+    if (!container) return;
 
-  private createMap(elementId: string, center: L.LatLngExpression): L.Map {
-    const map = L.map(elementId, {
-      renderer: L.canvas(),
-      zoomControl: true,
-      preferCanvas: true,
-      attributionControl: true
-    }).setView(center, 6);
+    this.map = L.map('mainMap', {
+      zoomControl: false
+    }).setView([13.5, 122.5], 6);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
-      minZoom: 3,
-      detectRetina: true
-    }).addTo(map);
+      minZoom: 3
+    }).addTo(this.map);
 
-    return map;
+    this.plotRoutes(); // draw initial route
   }
 
-  private checkMapContainers(): boolean {
-    const defaultMapEl = document.getElementById('defaultMap');
-    const safeMapEl = document.getElementById('safeMap');
-    
-    if (!defaultMapEl || !safeMapEl) {
-      console.warn('Map containers not found');
-      return false;
+  selectRoute(type: any) {
+    if (type === 'default' || type === 'safe') {
+      this.selectedRoute = type;
+      this.clearRoutes();
+      this.plotRoutes();
     }
-    
-    return defaultMapEl.offsetHeight > 0 && safeMapEl.offsetHeight > 0;
+  }
+  
+
+  
+  private clearRoutes() {
+    this.map.eachLayer((layer: any) => {
+      if (layer instanceof L.Polyline || layer instanceof L.Polygon) {
+        this.map.removeLayer(layer);
+      }
+    });
   }
 
   private plotRoutes() {
-    const routes = {
+    const routes: { [key: string]: L.LatLngTuple[] } = {
       default: [
-        [13.4, 122.5] as L.LatLngTuple,
-        [13.7, 123.0] as L.LatLngTuple,
-        [14.0, 123.4] as L.LatLngTuple
+        [13.4, 122.5],
+        [13.7, 123.0],
+        [14.0, 123.4]
       ],
       safe: [
-        [13.4, 122.5] as L.LatLngTuple,
-        [13.5, 122.8] as L.LatLngTuple,
-        [13.6, 123.1] as L.LatLngTuple,
-        [14.0, 123.4] as L.LatLngTuple
+        [13.4, 122.5],
+        [13.5, 122.8],
+        [13.6, 123.1],
+        [14.0, 123.4]
       ]
     };
-
-    L.polyline(routes.default, {
-      color: '#3366ff',
+  
+    const color = this.selectedRoute === 'default' ? '#3366ff' : '#33cc33';
+  
+    L.polyline(routes[this.selectedRoute], {
+      color,
       weight: 4,
       opacity: 0.9,
-      dashArray: '5, 5'
-    }).addTo(this.defaultMap);
-
-    L.polyline(routes.safe, {
-      color: '#33cc33',
-      weight: 4,
-      opacity: 0.9
-    }).addTo(this.safeMap);
+      dashArray: this.selectedRoute === 'default' ? '5, 5' : undefined
+    }).addTo(this.map);
   }
-
-  private loadCycloneZones() {
-    const mockData = [{
-      name: "Typhoon Sample",
-      impactZone: [
-        { lat: 13.5, lng: 122.5 },
-        { lat: 13.6, lng: 122.7 },
-        { lat: 13.4, lng: 122.6 }
-      ]
-    }];
-
-    this.processCyclones(mockData);
-  }
-
-  private processCyclones(cyclones: Array<{name: string, impactZone: Array<{lat: number, lng: number}>}>) {
-    cyclones.forEach(cyclone => {
-      const zone = cyclone.impactZone.map((p: {lat: number, lng: number}) => [p.lat, p.lng] as L.LatLngTuple);
-      const popup = `<b>${cyclone.name}</b><br>Risk Zone`;
-      
-      const polygon = L.polygon(zone, {
-        color: '#ff3333',
-        weight: 2,
-        opacity: 0.9,
-        fillOpacity: 0.3
-      });
-
-      polygon.bindPopup(popup);
-      polygon.addTo(this.defaultMap);
-      polygon.addTo(this.safeMap);
-    });
-  }
+  
 }
