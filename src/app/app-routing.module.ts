@@ -7,14 +7,11 @@ const routes: Routes = [
   { path: 'page2', loadChildren: () => import('./page2/page2.module').then(m => m.Page2PageModule) },
   { path: 'page3', loadChildren: () => import('./page3/page3.module').then(m => m.Page3PageModule) },
   { path: 'page4', loadChildren: () => import('./page4/page4.module').then(m => m.Page4PageModule) },
-  {
-    path: 'page5',
-    loadChildren: () => import('./page5/page5.module').then( m => m.Page5PageModule)
-  },
-  {
-    path: 'page6',
-    loadChildren: () => import('./page6/page6.module').then( m => m.Page6PageModule)
-  },
+  { path: 'page5', loadChildren: () => import('./page5/page5.module').then(m => m.Page5PageModule) },
+  { path: 'page6', loadChildren: () => import('./page6/page6.module').then(m => m.Page6PageModule) },
+  { path: 'fraud-watch', loadChildren: () => import('./fraud-watch/fraud-watch.module').then(m => m.FraudWatchPageModule) },
+  { path: 'typhoonsafe', loadChildren: () => import('./typhoonsafe/typhoonsafe.module').then(m => m.TyphoonsafePageModule) },
+  { path: 'pallet-ai', loadChildren: () => import('./pallet-ai/pallet-ai.module').then(m => m.PalletAiPageModule) },
 ];
 
 @NgModule({
