@@ -1,7 +1,43 @@
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">FraudWatch</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Fraud Watch</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="container">
+    <!-- Image Preview Section -->
+    <ion-card *ngIf="currentImage">
+      <ion-card-header>
+        <ion-card-title>Scanned Image</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]="currentImage" class="preview-image" alt="Scanned seal"/>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Action Buttons -->
+    <div class="button-group">
+      <ion-button expand="block" color="primary" (click)="scanSeal()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Scan Seal
+      </ion-button>
+
+      <ion-button 
+        expand="block" 
+        color="warning" 
+        (click)="checkForTampering()"
+        [disabled]="!currentImage || isLoading"
+      >
+        <ion-icon slot="start" name="shield-checkmark"></ion-icon>
+        <span *ngIf="!isLoading">Check for Tampering</span>
+        <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+      </ion-button>
+    </div>
+
+    <!-- Status Message -->
+    <ion-note *ngIf="!currentImage" class="instruction-text">
+      Please scan a document seal to begin analysis
+    </ion-note>
+  </div>
 </ion-content>

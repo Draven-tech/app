@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 20px;
+  }
+  
+  .preview-image {
+    max-width: 100%;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .instruction-text {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--ion-color-medium);
+  }
+  
+  ion-card {
+    max-width: 600px;
+    margin: 0 auto;
+  }

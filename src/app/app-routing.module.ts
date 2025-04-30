@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { FraudWatchPage } from './fraud-watch/fraud-watch.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'page1', pathMatch: 'full' },
@@ -9,9 +10,12 @@ const routes: Routes = [
   { path: 'page4', loadChildren: () => import('./page4/page4.module').then(m => m.Page4PageModule) },
   { path: 'page5', loadChildren: () => import('./page5/page5.module').then(m => m.Page5PageModule) },
   { path: 'page6', loadChildren: () => import('./page6/page6.module').then(m => m.Page6PageModule) },
-  { path: 'fraud-watch', loadChildren: () => import('./fraud-watch/fraud-watch.module').then(m => m.FraudWatchPageModule) },
   { path: 'typhoonsafe', loadChildren: () => import('./typhoonsafe/typhoonsafe.module').then(m => m.TyphoonsafePageModule) },
   { path: 'pallet-ai', loadChildren: () => import('./pallet-ai/pallet-ai.module').then(m => m.PalletAiPageModule) },
+  { 
+    path: 'fraud-watch',
+    component: FraudWatchPage // Directly load the component
+  }
 ];
 
 @NgModule({
