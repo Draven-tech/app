@@ -28,6 +28,22 @@ export class CargoMatchPage {
   listings: CargoListing[] = [];
   userLocation: { lat: number; lng: number } | null = null;
   isDriverView: boolean = false;
+  headerHidden = false;
+  lastScrollTop = 0;
+
+  onScroll(event: any) {
+    const currentScroll = event.detail.scrollTop;
+
+    if (currentScroll > this.lastScrollTop + 10) {
+      this.headerHidden = true;
+    } else if (currentScroll < this.lastScrollTop - 10 || currentScroll <= 0) {
+      this.headerHidden = false;
+    }
+
+    this.lastScrollTop = currentScroll;
+  }
+
+  
   
   newListing = {
     vehicleType: 'L300',
@@ -37,7 +53,11 @@ export class CargoMatchPage {
     destination: ''
   };
 
+  
+
   constructor(private alertCtrl: AlertController) {}
+
+
 
   async ionViewDidEnter() {
     await this.getUserLocation();

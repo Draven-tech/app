@@ -6,9 +6,8 @@ ion-header {
     transition: transform 0.3s ease-in-out;
     z-index: 10;
   
-    // Remove !important and use ::ng-deep to reach inner components
     ::ng-deep ion-toolbar {
-      background-color: #cf8f2f !important; // your blue color
+      background-color: #cf8f2f !important;
       color: white !important;
     }
   

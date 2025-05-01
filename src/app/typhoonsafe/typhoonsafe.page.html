@@ -7,7 +7,18 @@
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content class="ion-padding">
+
+  <div class="package-dropdown">
+    <ion-label>Package No.</ion-label>
+    <ion-select [(ngModel)]="selectedPackage" interface="popover">
+      <ion-select-option value="PKG-001">CNTR-2025-0429-C1 (Current)</ion-select-option>
+    </ion-select>
+  </div>
+
+
   <div class="toggle-tabs">
     <ion-segment [value]="selectedRoute" (ionChange)="selectRoute($event.detail.value)">
       <ion-segment-button value="default">
@@ -42,7 +53,6 @@
         {{ selectedRoute === 'default' ? 'Standard shipments under clear weather' : 'Sensitive cargo during typhoon season' }}
       </p>
     </ion-card-content>
-  </ion-card>
-  
+  </ion-card>  
   
 </ion-content>

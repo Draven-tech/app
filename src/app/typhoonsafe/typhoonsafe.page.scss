@@ -31,7 +31,7 @@ ion-title {
 
 /* Tabs Style */
 .toggle-tabs {
-  margin-top: 80px;
+  margin-top: 15px;
   margin-bottom: 16px;
 
   ion-segment {
@@ -44,8 +44,7 @@ ion-title {
     --background: #333; // unselected background
     --indicator-color: transparent;
     --border-radius: 12px;
-    margin: 2px;
-  
+    margin: 2px; 
     font-weight: 600;
   
     &.segment-button-checked {
@@ -107,3 +106,39 @@ ion-title {
     margin: 4px 0;
   }
 }
+
+
+.package-dropdown {
+  margin-top: 50px;
+  margin-bottom: 0; // removed space below
+  padding: 0 16px 0 16px;
+
+  ion-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+    padding-left: 4px;
+    opacity: 0.85;
+  }
+
+  ion-select {
+    --background: #2a2a2a;
+    --color: #ffffff;
+    --placeholder-color: #cccccc;
+    --padding-start: 14px;
+    --padding-end: 14px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 15px;
+    border: 1px solid #555;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+      border-color: #cf8f2f;
+      box-shadow: 0 0 0 2px rgba(207, 143, 47, 0.4);
+    }
+  }
+}
+

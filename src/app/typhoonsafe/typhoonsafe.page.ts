@@ -11,7 +11,8 @@ import { Geolocation } from '@capacitor/geolocation';
   styleUrls: ['./typhoonsafe.page.scss']
 })
 export class TyphoonSafePage implements AfterViewInit {
-  selectedRoute: 'default' | 'safe' = 'default'; // which route to display
+  selectedRoute: 'default' | 'safe' = 'default'; 
+  selectedPackage = 'PKG-001';
   private map!: L.Map;
   private userMarker?: L.Marker;
 
