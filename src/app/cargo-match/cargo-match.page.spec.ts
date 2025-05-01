@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PalletAiPage } from './pallet-ai.page';
+import { CargoMatchPage } from './cargo-match.page';
 
-describe('PalletAiPage', () => {
-  let component: PalletAiPage;
-  let fixture: ComponentFixture<PalletAiPage>;
+describe('CargoMatchPage', () => {
+  let component: CargoMatchPage;
+  let fixture: ComponentFixture<CargoMatchPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PalletAiPage);
+    fixture = TestBed.createComponent(CargoMatchPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

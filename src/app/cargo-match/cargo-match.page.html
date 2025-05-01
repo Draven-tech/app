@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ isDriverView ? 'Driver Mode' : 'Find Trucks' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleView()">
+        {{ isDriverView ? 'Find Loads' : 'Driver Mode' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- CUSTOMER VIEW -->
+<ion-content *ngIf="!isDriverView" class="ion-padding">
+  <ion-list lines="full">
+    <ion-item *ngFor="let listing of listings" class="listing-card">
+      <ion-avatar slot="start">
+        <img [src]="listing.vehiclePhoto">
+      </ion-avatar>
+      
+      <ion-label>
+        <h2>{{ listing.driverName }}</h2>
+        <p>
+          <ion-icon name="car" color="primary"></ion-icon>
+          {{ listing.vehicleType }} ({{ listing.remainingCapacity }}kg available)
+        </p>
+        <p>
+          <ion-icon name="navigate" color="secondary"></ion-icon>
+          {{ listing.origin }} → {{ listing.destination }}
+        </p>
+        <p>
+          <ion-icon name="cash" color="success"></ion-icon>
+          ₱{{ listing.pricePerKg }}/kg
+        </p>
+      </ion-label>
+      
+      <ion-button 
+        slot="end" 
+        fill="outline"
+        (click)="bookCargo(listing)"
+        [disabled]="listing.remainingCapacity <= 0">
+        {{ listing.remainingCapacity > 0 ? 'Book' : 'Full' }}
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<!-- DRIVER VIEW -->
+<ion-content *ngIf="isDriverView" class="ion-padding driver-view">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Vehicle Type</ion-label>
+      <ion-select [(ngModel)]="newListing.vehicleType" interface="action-sheet">
+        <ion-select-option value="L300">L300 Van</ion-select-option>
+        <ion-select-option value="6-Wheeler">6-Wheeler Truck</ion-select-option>
+        <ion-select-option value="10-Wheeler">10-Wheeler Truck</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Total Capacity (kg)</ion-label>
+      <ion-input 
+        [(ngModel)]="newListing.capacity" 
+        type="number" 
+        placeholder="2000">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Price Per kg (₱)</ion-label>
+      <ion-input 
+        [(ngModel)]="newListing.pricePerKg" 
+        type="number" 
+        placeholder="15">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">From (Origin)</ion-label>
+      <ion-input 
+        [(ngModel)]="newListing.origin" 
+        placeholder="Manila">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">To (Destination)</ion-label>
+      <ion-input 
+        [(ngModel)]="newListing.destination" 
+        placeholder="Cebu">
+      </ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button 
+    expand="block" 
+    (click)="addDriverListing()"
+    [disabled]="!newListing.capacity || !newListing.origin || !newListing.destination"
+    color="primary">
+    <ion-icon name="car" slot="start"></ion-icon>
+    List My Vehicle
+  </ion-button>
+</ion-content>

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PalletAiPage } from './pallet-ai.page';
+import { CargoMatchPage } from './cargo-match.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: PalletAiPage
+    component: CargoMatchPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PalletAiPageRoutingModule {}
+export class CargoMatchPageRoutingModule {}

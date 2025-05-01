@@ -15,11 +15,14 @@ const routes: Routes = [
     loadChildren: () => import('./typhoonsafe/typhoonsafe.module')
       .then(m => m.TyphoonSafePageModule) // Must match EXACTLY
   },
-  { path: 'pallet-ai', loadChildren: () => import('./pallet-ai/pallet-ai.module').then(m => m.PalletAiPageModule) },
   { 
     path: 'fraud-watch',
     component: FraudWatchPage
+  },  {
+    path: 'cargo-match',
+    loadChildren: () => import('./cargo-match/cargo-match.module').then( m => m.CargoMatchPageModule)
   }
+
 ];
 
 @NgModule({

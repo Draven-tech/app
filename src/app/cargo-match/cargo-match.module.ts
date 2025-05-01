@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PalletAiPageRoutingModule } from './pallet-ai-routing.module';
+import { CargoMatchPageRoutingModule } from './cargo-match-routing.module';
 
-import { PalletAiPage } from './pallet-ai.page';
+import { CargoMatchPage } from './cargo-match.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PalletAiPageRoutingModule
+    CargoMatchPageRoutingModule
   ],
-  declarations: [PalletAiPage]
+  declarations: [CargoMatchPage]
 })
-export class PalletAiPageModule {}
+export class CargoMatchPageModule {}
