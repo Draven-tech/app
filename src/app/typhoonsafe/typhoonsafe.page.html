@@ -27,13 +27,22 @@
 
   <ion-card class="route-info-card">
     <ion-card-header>
-      <ion-card-title>{{ selectedRoute | titlecase }} Route Details</ion-card-title>
+      <ion-card-title>{{ selectedRoute | titlecase }} Route: Cebu to Batangas</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p><strong>Distance:</strong> 28.4 km</p>
-      <p><strong>Estimated Time:</strong> 35 mins</p>
+      <p><strong>From:</strong> Cebu City Pier</p>
+      <p><strong>To:</strong> Batangas Port</p>
+      <p><strong>Distance:</strong> ~600+ km (estimated)</p>
+      <p><strong>Estimated Time:</strong> 8–10 hours by mixed transport</p>
       <p><strong>Weather Alert:</strong> None</p>
+      <p><strong>Route Type:</strong> 
+        {{ selectedRoute === 'default' ? 'Faster maritime route with standard risk' : 'Typhoon-safe inland route' }}
+      </p>
+      <p><strong>Recommended For:</strong> 
+        {{ selectedRoute === 'default' ? 'Standard shipments under clear weather' : 'Sensitive cargo during typhoon season' }}
+      </p>
     </ion-card-content>
   </ion-card>
+  
   
 </ion-content>
